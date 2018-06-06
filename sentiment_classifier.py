@@ -11,9 +11,9 @@ def analiys_tweets(df):
     nltk.download('wordnet')
     nltk.download('punkt')
     nltk.download('averaged_perceptron_tagger')
-    nltk.download('stopwords')
-    stop_words = list(get_stop_words('en'))  # About 900 stopwords
-    nltk_words = list(stopwords.words('english'))
+    # nltk.download('stopwords')
+    # stop_words = list(get_stop_words('en'))  # About 900 stopwords
+    # nltk_words = list(stopwords.words('english'))
 
     scores = list()
     sentiments = list()
@@ -23,7 +23,7 @@ def analiys_tweets(df):
         # with-python / blob / master / Chapter - 7 / sentiment_analysis_unsupervised_lexical.py
         # https: // stackoverflow.com / questions / 5486337 / how - to - remove - stop - words - using - nltk - or -python
         text = row['text']
-        output = [w for w in text.split() if not w in stop_words]
+        # output = [w for w in text.split() if not w in stop_words]
 
         text = text.split()
         text = ' '.join(text)
@@ -70,5 +70,4 @@ def analiys_tweets(df):
     df['score'] = scores
     df['sentiment'] = sentiments
 
-    # df.to_csv("C:\\Users\\zaher\\Documents\\Github\\DB_assignment2\\csv_data\\tweets_after_clean.csv")
     return df

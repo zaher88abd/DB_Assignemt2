@@ -1,30 +1,11 @@
 import getTweets_and_clean as tweets
-from textblob import TextBlob
 from elasticsearch import Elasticsearch
+import sentiment_classifier as classifier
 from elasticsearch import helpers
 
 
-def sentiment_tweet(text):
-    result = TextBlob(text).sentiment
-    if result.polarity == 0:
-        sentiment = "netural"
-    elif result.polarity > 0:
-        sentiment = "possitive"
-    else:
-        sentiment = "negative"
-    return sentiment, round(result.polarity, 2)
-
-
 def analysis_tweets(df):
-    scores = list()
-    sentiments = list()
-    for index, row in df.iterrows():
-        sentiment, score = sentiment_tweet(row['text'])
-        scores.append(score)
-        sentiments.append(sentiment)
-
-    df['sentiment'] = sentiments
-    df['score'] = scores
+    df = classifier.analiys_tweets(df)
     return df
 
 
@@ -33,10 +14,9 @@ def import_data_ES_server(es_server, df):
     actions = []
     for index, row in df.iterrows():
         record = {
-            "_index": "tweet_data",
+            "_index": "tweet_db",
             "_type": "_doc",
             "_source": {
-                "id": row['id'],
                 "user": row['user'],
                 "created_at": row['created_at'],
                 "text": row['text'],
@@ -55,7 +35,7 @@ def import_data_ES_server(es_server, df):
 
 tweet_df = ''
 if __name__ == '__main__':
-    es = Elasticsearch(['http://35.183.6.252:9200/'])
+    es = Elasticsearch(['http://ec2-52-91-233-44.compute-1.amazonaws.com:9200/'])
 
     #  get and clean tweets
     print("Start getting data from twitter...")
