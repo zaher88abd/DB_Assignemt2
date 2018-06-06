@@ -1,9 +1,6 @@
-import pandas as pd
 import nltk
 from nltk.corpus import sentiwordnet as swn
 import numpy as np
-from stop_words import get_stop_words
-from nltk.corpus import stopwords
 
 
 def analiys_tweets(df):
