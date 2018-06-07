@@ -35,7 +35,7 @@ def import_data_ES_server(es_server, df):
 
 tweet_df = ''
 if __name__ == '__main__':
-    es = Elasticsearch(['http://ec2-52-91-233-44.compute-1.amazonaws.com:9200/'])
+    es = Elasticsearch(['http://localhost:9200/'])
 
     #  get and clean tweets
     print("Start getting data from twitter...")
