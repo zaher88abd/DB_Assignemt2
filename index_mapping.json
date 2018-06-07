@@ -1,0 +1,25 @@
+//PUT tweet_db
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "user": {
+          "type": "keyword"
+        },
+        "created_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "text": {
+          "type": "keyword"
+        },
+        "sentiment": {
+          "type": "keyword"
+        },
+        "score": {
+          "type": "half_float"
+        }
+      }
+    }
+  }
+}

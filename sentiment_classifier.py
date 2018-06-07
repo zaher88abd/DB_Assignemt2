@@ -16,15 +16,9 @@ def analiys_tweets(df):
     sentiments = list()
     df = df[df['text'].notnull()]
     for index, row in df.iterrows():
-        # https: // github.com / dipanjanS / text - analytics -
-        # with-python / blob / master / Chapter - 7 / sentiment_analysis_unsupervised_lexical.py
-        # https: // stackoverflow.com / questions / 5486337 / how - to - remove - stop - words - using - nltk - or -python
         text = row['text']
-        # output = [w for w in text.split() if not w in stop_words]
-
         text = text.split()
         text = ' '.join(text)
-        # text = ' '.join(output)
         text_tokens = nltk.word_tokenize(text)
         tagged_text = nltk.pos_tag(text_tokens)
         token_count = pos_score = neg_score = obj_score = 0
@@ -68,3 +62,6 @@ def analiys_tweets(df):
     df['sentiment'] = sentiments
 
     return df
+# https: // github.com / dipanjanS / text - analytics -
+# with-python / blob / master / Chapter - 7 / sentiment_analysis_unsupervised_lexical.py
+# https: // stackoverflow.com / questions / 5486337 / how - to - remove - stop - words - using - nltk - or -python
