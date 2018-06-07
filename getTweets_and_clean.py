@@ -53,13 +53,9 @@ def get_query_result(query="black panther -filter:retweets"):
             text = str(text.encode('utf8'))
             text = text.replace("#", ' ')
             text = text.replace('\n', ' ')
-            # remove bad unicode
-            text = re.sub('[^(\x20-\x7F)]+', ' ', text)
-            # remove @ssdfsdf
+            text = re.sub(r'[^(\x20-\x7F)]+', ' ', text)
             text = re.sub(r'@[\w]+', " ", text)
-            # remove &lt;
             text = re.sub(r'&[\w]+;', " ", text)
-            # remove https
             text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', " ", text)
             text = text.strip()
 
